@@ -4,12 +4,14 @@ import mongoose from 'mongoose';
 import { Server } from 'socket.io';
 import cors from 'cors';
 import Document from './models/Document.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://ritya0117:CuV3nBrTPCrZHJXv@cluster0.faizjbi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+mongoose.connect(process.env.MONGO_URI);
 
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: '*' } });
